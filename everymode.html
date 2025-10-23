@@ -1,0 +1,148 @@
+everymode-landing/
+├── index.html
+├── behind.html
+├── how-it-works.html
+├── style.css
+└── images/
+    ├── logo.png
+    ├── team-member-1.jpg
+    ├── team-member-2.jpg
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Everymode for everyone" />
+  <title>Everymode — Accessible Landing Page</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header role="banner" class="container" aria-label="Site header">
+    <img src="images/logo.png" alt="Everymode logo" class="logo" />
+  </header>
+
+  <nav aria-label="Primary" role="navigation">
+    <div class="container nav-inner">
+      <div class="nav-links" role="list">
+        <a href="index.html" role="listitem" aria-current="page">Home</a>
+        <a href="behind.html" role="listitem">Behind Everymode</a>
+        <a href="how-it-works.html" role="listitem">How It Works</a>
+      </div>
+      <a class="btn" href="#download" aria-label="Download Everymode">☻ Download</a>
+    </div>
+  </nav>
+
+  <main role="main" class="container">
+    <section class="section">
+      <h1>Everymode</h1>
+      <p>Here’s an accessible landing page for Everymode — the browser plugin that makes the web work for everyone.</p>
+      <p><a id="download" href="#learn-more" class="btn" aria-label="Select to download">☻ DOWNLOAD ☻</a></p>
+    </section>
+
+    <section class="section" id="learn-more">
+      <h2>Make the web work for everyone</h2>
+      <p>Improve contrast, fix missing labels, streamline keyboard navigation, and more — so people of all abilities can browse with confidence.</p>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">© <span id="year"></span> Everymode</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Meet the Everymode team and our story"/>
+  <title>Behind Everymode</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header role="banner" class="container" aria-label="Site header">
+    <img src="images/logo.png" alt="Everymode logo" class="logo" />
+  </header>
+
+  <nav aria-label="Primary" role="navigation">
+    <div class="container nav-inner">
+      <div class="nav-links" role="list">
+        <a href="index.html" role="listitem">Home</a>
+        <a href="behind.html" role="listitem" aria-current="page">Behind Everymode</a>
+        <a href="how-it-works.html" role="listitem">How It Works</a>
+      </div>
+      <a class="btn" href="mailto:hello@everymode.example" aria-label="Contact us by email">Contact Us</a>
+    </div>
+  </nav>
+
+  <main role="main" class="container">
+    <section class="section" aria-labelledby="team-title">
+      <h1 id="team-title">Behind Everymode</h1>
+      <p>We’re designers, developers, and accessibility advocates building practical tools that help real people every day.</p>
+
+      <!-- Team grid -->
+      <div class="team-grid" role="list" aria-label="Everymode team">
+        <article class="team-card" role="listitem">
+          <img src="images/team-member-1.jpg" alt="Portrait of Alex Chen, Head of Engineering" />
+          <h3>Alex Chen</h3>
+          <p>Head of Engineering — Web tooling, performance, and accessibility automation.</p>
+        </article>
+
+        <article class="team-card" role="listitem">
+          <img src="images/team-member-2.jpg" alt="Portrait of Maya Patel, Product Design Lead" />
+          <h3>Maya Patel</h3>
+          <p>Product Design Lead — Inclusive UX patterns and design systems.</p>
+        </article>
+
+        <article class="team-card" role="listitem">
+          <img src="images/team-member-3.jpg" alt="Portrait of Jordan Lee, Accessibility Researcher" />
+          <h3>Jordan Lee</h3>
+          <p>Accessibility Researcher — WCAG audits, user testing, and assistive tech.</p>
+        </article>
+
+        <article class="team-card" role="listitem">
+          <img src="images/team-member-4.jpg" alt="Portrait of Sam Rivera, Developer Advocate" />
+          <h3>Sam Rivera</h3>
+          <p>Developer Advocate — Docs, tutorials, and community education.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="why-title">
+      <h2 id="why-title">Why we created Everymode</h2>
+      <p>
+        We believe access is a right, not a nice-to-have. Too many websites
+        ship with low contrast, missing labels, and broken keyboard flows. We created
+        Everymode to reduce those barriers — blending automated fixes with human-centered
+        design so teams can build inclusively from day one.
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="contact-title">
+      <h2 id="contact-title">Stay in touch</h2>
+      <p>Have questions, want to partner, or need a walkthrough?</p>
+      <p>
+        <a class="btn" href="mailto:hello@everymode.example" aria-label="Email Everymode team">
+          Contact Us
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">© <span id="year"></span> Everymode</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
