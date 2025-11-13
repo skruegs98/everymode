@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ship accessible SaaS without slowing down. Everymode enforces WCAG compliance in your CI/CD pipeline." />
+  <title>Everymode - Ship Accessible SaaS Without Slowing Down</title>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      line-height: 1.6;
+      color: #202124;
+      background: #ffffff;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Google Sans', Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      padding: 20px 0;
+      background: #fff;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      position: relative;
+    }
+
+    .logo svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .logo-text {
+      font-family: 'Google Sans', Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      background: linear-gradient(90deg, #0F9D58 0%, #fbbc04 33%, #ea4335 66%, #4285f4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav {
+      background: #ffffff;
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #5f6368;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+      padding: 8px 0;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
+      color: #4285f4;
+    }
+
+    .nav-links a:focus {
+      outline: 3px solid #4285f4;
+      outline-offset: 2px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #4285f4;
+      color: white;
+      text-decoration: none;
+      border-radius: 24px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 2px 6px 2px rgba(60,64,67,.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%
+      );
+      animation: shimmer-slow 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer-slow {
+      0% {
+        left: -100%;
+      }
+      50% {
+        left: 100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+
+    .btn:hover {
+      background: #5a95f5;
+      box-shadow: 0 1px 3px 0 rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15);
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn:focus {
+      outline: 3px solid #4285f4;
+      outline-offset: 2px;
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: #202124;
+      border: 2px solid #dadce0;
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,.3);
+    }
+
+    .btn-secondary:hover {
+      background: #f8f9fa;
+      border-color: #4285f4;
+      color: #1a73e8;
+    }
+
+    .btn-secondary::before {
+      display: none;
+    }
+
+    main {
+      padding: 60px 0;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 0 100px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #0F9D58 0%, #34a853 20%, #fbbc04 40%, #ea4335 60%, #4285f4 80%, #1a73e8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .hero .subheadline {
+      font-size: 20px;
+      color: #5f6368;
+      margin-bottom: 40px;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .social-proof {
+      background: #f8f9fa;
+      padding: 80px 0;
+      margin-top: 40px;
+    }
+
+    .social-proof h2 {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 400;
+      margin-bottom: 16px;
+      background: linear-gradient(90deg, #ea4335 0%, #fbbc04 50%, #34a853 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .social-proof .intro {
+      text-align: center;
+      font-size: 16px;
+      color: #5f6368;
+      margin-bottom: 60px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 40px 32px;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .stat-card:hover {
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 2px 6px 2px rgba(60,64,67,.15);
+      transform: translateY(-2px);
+    }
+
+    .stat-card:nth-child(1):hover {
+      border-color: #ea4335;
+    }
+
+    .stat-card:nth-child(2):hover {
+      border-color: #f4b400;
+    }
+
+    .stat-card:nth-child(3):hover {
+      border-color: #0F9D58;
+    }
+
+    .stat-card:focus-within {
+      outline: 3px solid #4285f4;
+      outline-offset: 2px;
+    }
+
+    .stat-card .stat-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 24px;
+      font-weight: 500;
+      font-family: 'Google Sans', Arial, sans-serif;
+    }
+
+    .stat-card:nth-child(1) .stat-icon { 
+      background: rgba(234, 67, 53, 0.1);
+      color: #ea4335;
+    }
+    .stat-card:nth-child(2) .stat-icon { 
+      background: rgba(244, 180, 0, 0.1);
+      color: #f4b400;
+    }
+    .stat-card:nth-child(3) .stat-icon { 
+      background: rgba(15, 157, 88, 0.1);
+      color: #0F9D58;
+    }
+
+    .stat-card .stat-value {
+      font-size: 32px;
+      font-weight: 500;
+      color: #202124;
+      margin-bottom: 8px;
+      font-family: 'Google Sans', Arial, sans-serif;
+    }
+
+    .stat-card .stat-label {
+      color: #5f6368;
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .stat-card .stat-source {
+      font-size: 12px;
+      color: #80868b;
+      margin-top: 12px;
+    }
+
+    .solution-callout {
+      text-align: center;
+      padding: 48px;
+      background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
+      color: white;
+      border-radius: 8px;
+      margin-top: 48px;
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 2px 6px 2px rgba(60,64,67,.15);
+    }
+
+    .solution-callout h3 {
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+
+    .solution-callout p {
+      font-size: 16px;
+      opacity: 0.95;
+      font-weight: 300;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section h2 {
+      font-size: 40px;
+      font-weight: 400;
+      margin-bottom: 24px;
+      background: linear-gradient(90deg, #1a73e8 0%, #4285f4 50%, #34a853 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .section p {
+      font-size: 16px;
+      color: #5f6368;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-top: 56px;
+    }
+
+    .feature-card {
+      padding: 32px;
+      background: white;
+      border-radius: 8px;
+      border: 2px solid #dadce0;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: transparent;
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 2px 6px 2px rgba(60,64,67,.15);
+      transform: translateY(-2px);
+    }
+
+    .feature-card:nth-child(1):hover {
+      border-color: #4285f4;
+    }
+
+    .feature-card:nth-child(2):hover {
+      border-color: #ea4335;
+    }
+
+    .feature-card:nth-child(3):hover {
+      border-color: #f4b400;
+    }
+
+    .feature-card:nth-child(4):hover {
+      border-color: #0F9D58;
+    }
+
+    .feature-card:nth-child(5):hover {
+      border-color: #4285f4;
+    }
+
+    .feature-card:nth-child(6):hover {
+      border-color: #ea4335;
+    }
+
+    .feature-card:focus-within {
+      outline: 3px solid #4285f4;
+      outline-offset: 2px;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .feature-card:nth-child(1) .feature-icon {
+      background: rgba(66, 133, 244, 0.15);
+      color: #4285f4;
+    }
+
+    .feature-card:nth-child(2) .feature-icon {
+      background: rgba(234, 67, 53, 0.15);
+      color: #ea4335;
+    }
+
+    .feature-card:nth-child(3) .feature-icon {
+      background: rgba(244, 180, 0, 0.15);
+      color: #f4b400;
+    }
+
+    .feature-card:nth-child(4) .feature-icon {
+      background: rgba(15, 157, 88, 0.15);
+      color: #0F9D58;
+    }
+
+    .feature-card:nth-child(5) .feature-icon {
+      background: rgba(66, 133, 244, 0.15);
+      color: #4285f4;
+    }
+
+    .feature-card:nth-child(6) .feature-icon {
+      background: rgba(234, 67, 53, 0.15);
+      color: #ea4335;
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: #202124;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: #5f6368;
+      line-height: 1.6;
+    }
+
+    .cta-section {
+      text-align: center;
+      background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
+      color: white;
+      padding: 80px 48px;
+      border-radius: 8px;
+      margin: 80px 0;
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 2px 6px 2px rgba(60,64,67,.15);
+    }
+
+    .cta-section h2 {
+      font-size: 36px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      color: white;
+      background: none;
+      -webkit-text-fill-color: white;
+    }
+
+    .cta-section p {
+      font-size: 18px;
+      color: white;
+      margin-bottom: 32px;
+      font-weight: 300;
+      opacity: 0.95;
+    }
+
+    .cta-section .btn {
+      background: white;
+      color: #1a73e8;
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,.3);
+    }
+
+    .cta-section .btn:hover {
+      background: #f8f9fa;
+      color: #174ea6;
+      box-shadow: 0 1px 3px 0 rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15);
+    }
+
+    .cta-section .btn::before {
+      display: none;
+    }
+
+    footer {
+      background: #f8f9fa;
+      color: #5f6368;
+      padding: 32px 0;
+      text-align: center;
+      border-top: 1px solid #dadce0;
+    }
+
+    footer p {
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero .subheadline {
+        font-size: 18px;
+      }
+
+      .section h2 {
+        font-size: 32px;
+      }
+
+      .cta-group {
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header role="banner" class="container" aria-label="Site header">
+    <div class="logo-container">
+      <div class="logo">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 50 10 A 40 40 0 0 1 90 50 L 75 50 A 25 25 0 0 0 50 25 Z" fill="#0F9D58"/>
+          <path d="M 10 50 A 40 40 0 0 1 50 10 L 50 25 A 25 25 0 0 0 25 50 Z" fill="#f4b400"/>
+          <path d="M 10 50 A 40 40 0 0 0 60 85 L 58 72 A 25 25 0 0 1 25 50 Z" fill="#ea4335"/>
+          <path d="M 58 66 L 58 91 L 80 78.5 Z" fill="#ea4335"/>
+          <rect x="50" y="45" width="40" height="10" fill="#4285f4"/>
+        </svg>
+      </div>
+      <span class="logo-text">everymode</span>
+    </div>
+  </header>
+
+  <nav aria-label="Primary navigation" role="navigation">
+    <div class="container nav-inner">
+      <div class="nav-links" role="list">
+        <a href="index.html" role="listitem" aria-current="page">Home</a>
+        <a href="behind.html" role="listitem">Behind Everymode</a>
+        <a href="how-it-works.html" role="listitem">How It Works</a>
+      </div>
+      <a class="btn" href="#contact" aria-label="Get early access"><span>Get Early Access</span></a>
+    </div>
+  </nav>
+
+  <main role="main">
+    <section class="hero container">
+      <h1>Ship Accessible SaaS — Without Slowing Down</h1>
+      <p class="subheadline">
+        Everymode enforces WCAG compliance in your CI/CD pipeline, so you build inclusive products from day one — not after costly audits and rework.
+      </p>
+      <div class="cta-group">
+        <a href="#contact" class="btn" aria-label="See how Everymode works"><span>See How It Works</span></a>
+        <a href="#contact" class="btn btn-secondary" aria-label="Get early access to Everymode"><span>Get Early Access</span></a>
+      </div>
+    </section>
+
+    <section class="social-proof">
+      <div class="container">
+        <h2>The Accessibility Crisis Facing SaaS Teams</h2>
+        <p class="intro">Most products ship inaccessible — leading to lawsuits, costly fixes, and missed opportunities</p>
+        
+        <div class="stats-grid" id="stats-container">
+          <!-- Statistics will be dynamically generated by JavaScript -->
+        </div>
+
+        <div class="solution-callout">
+          <h3>Everymode eliminates accessibility debt before it starts</h3>
+          <p>Automated WCAG enforcement in every commit, sprint, and deploy</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <h2>Build Fast. Stay Compliant. Never Compromise.</h2>
+      <p>
+        Most SaaS teams don't plan for accessibility until it's too late. Retrofitting can consume 50–70% of development time and cost tens of thousands annually in audits and rework.
+      </p>
+      <p>
+        <strong>Everymode changes that.</strong> Our SaaS-first accessibility engine integrates directly into your CI/CD pipeline, automatically flagging and blocking non-compliant code before it ships.
+      </p>
+
+      <div class="features-grid" id="features-container">
+        <!-- Feature cards will be dynamically generated by JavaScript -->
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="cta-section">
+        <h2 id="contact">Ready to Build Accessible SaaS?</h2>
+        <p>Join forward-thinking SaaS teams shipping inclusive products without the burden.</p>
+        <div class="cta-group">
+          <a href="mailto:hello@everymode.com" class="btn" aria-label="Request a demo"><span>Request a Demo</span></a>
+          <a href="how-it-works.html" class="btn btn-secondary" aria-label="Learn more about Everymode"><span>Learn More</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Everymode. Building accessible software for everyone.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
