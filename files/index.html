@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Everymode – AI Accessibility Agent for Product Teams</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Everymode is an AI accessibility agent that audits and remediates code in real-time, ensuring ADA & EAA compliance without sacrificing UX or velocity."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #ffffff;
+      color: #202124;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Google Sans', 'Roboto', sans-serif;
+      font-weight: 500;
+    }
+
+    /* Header */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e8eaed;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #202124;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: #202124;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      background: #1a73e8;
+      color: #ffffff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+    }
+
+    .btn-primary:hover {
+      background: #1765cc;
+      box-shadow: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #5f6368;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e8f0fe;
+      color: #1967d2;
+      padding: 6px 16px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #34a853;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      line-height: 1.2;
+      color: #202124;
+      margin-bottom: 24px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: #5f6368;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-note {
+      font-size: 14px;
+      color: #80868b;
+    }
+
+    /* Demo Card */
+    .demo-card {
+      max-width: 900px;
+      margin: 60px auto 0;
+      background: #ffffff;
+      border: 1px solid #e8eaed;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 2px 6px 2px rgba(60,64,67,0.15);
+    }
+
+    .demo-header {
+      background: #f8f9fa;
+      padding: 16px 24px;
+      border-bottom: 1px solid #e8eaed;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .demo-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #202124;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .demo-badge {
+      background: #e6f4ea;
+      color: #137333;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .demo-body {
+      padding: 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .demo-stat {
+      text-align: left;
+    }
+
+    .demo-stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #80868b;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .demo-stat-value {
+      font-size: 24px;
+      font-weight: 500;
+      color: #202124;
+      margin-bottom: 4px;
+    }
+
+    .demo-stat-desc {
+      font-size: 14px;
+      color: #5f6368;
+    }
+
+    .demo-stat .demo-badge {
+      margin-top: 8px;
+    }
+
+    /* Features Section */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-title {
+      font-size: 40px;
+      color: #202124;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: #5f6368;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid #e8eaed;
+      border-radius: 16px;
+      padding: 32px;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 4px 8px 0 rgba(60,64,67,0.1), 0 8px 16px 4px rgba(60,64,67,0.1);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .feature-icon-blue {
+      background: #e8f0fe;
+      color: #1a73e8;
+    }
+
+    .feature-icon-green {
+      background: #e6f4ea;
+      color: #34a853;
+    }
+
+    .feature-icon-yellow {
+      background: #fef7e0;
+      color: #f9ab00;
+    }
+
+    .feature-title {
+      font-size: 20px;
+      color: #202124;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: #5f6368;
+      line-height: 1.6;
+    }
+
+    .feature-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f8f9fa;
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 12px;
+      color: #5f6368;
+      margin-top: 16px;
+      font-weight: 500;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: #f8f9fa;
+      padding: 80px 24px;
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .stat-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      border: 1px solid #e8eaed;
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 500;
+      color: #1a73e8;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .stat-label {
+      font-size: 16px;
+      color: #5f6368;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .stat-source {
+      font-size: 12px;
+      color: #80868b;
+      font-style: italic;
+    }
+
+    .problems-list {
+      list-style: none;
+      margin-top: 48px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .problem-item {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      border: 1px solid #e8eaed;
+    }
+
+    .problem-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #fce8e6;
+      color: #d93025;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      font-weight: 500;
+    }
+
+    .problem-content h3 {
+      font-size: 18px;
+      color: #202124;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .problem-content p {
+      font-size: 14px;
+      color: #5f6368;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #e8f0fe 0%, #e6f4ea 100%);
+      padding: 80px 24px;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: 40px;
+      color: #202124;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .cta-subtitle {
+      font-size: 18px;
+      color: #5f6368;
+      margin-bottom: 40px;
+    }
+
+    .form-container {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 40px;
+      border: 1px solid #e8eaed;
+      box-shadow: 0 2px 4px 0 rgba(60,64,67,0.1), 0 4px 8px 2px rgba(60,64,67,0.1);
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 20px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #202124;
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Roboto', sans-serif;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #1a73e8;
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-submit {
+      margin-top: 8px;
+    }
+
+    .form-submit .btn-primary {
+      width: 100%;
+      padding: 14px 24px;
+      font-size: 16px;
+    }
+
+    /* Footer */
+    footer {
+      background: #f8f9fa;
+      border-top: 1px solid #e8eaed;
+      padding: 40px 24px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #5f6368;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* Hero Section */
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-body {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-title {
+        font-size: 32px;
+      }
+
+      .form-container {
+        padding: 24px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #1a73e8;
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .skip-link:focus {
+      top: 8px;
+      left: 8px;
+      z-index: 1000;
+    }
+
+    *:focus-visible {
+      outline: 2px solid #1a73e8;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header>
+    <nav class="nav">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <img src="everymode-logo.png" alt="Everymode logo" />
+        </div>
+        <span class="logo-text">Everymode</span>
+      </a>
+
+      <div class="nav-cta">
+        <a href="https://repl-name-generator--swk8557.replit.app" class="btn-primary" target="_blank" rel="noopener noreferrer">Try Everymode</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-badge">
+        Private beta · Product & engineering teams
+      </div>
+
+      <h1>Ship accessible software without slowing your team</h1>
+
+      <p class="hero-subtitle">
+        Everymode is an AI accessibility agent that audits and remediates code in real-time, ensuring ADA & EAA compliance.
+      </p>
+
+      <div class="hero-cta">
+        <a href="https://repl-name-generator--swk8557.replit.app" class="btn-primary" target="_blank" rel="noopener noreferrer">Request beta access</a>
+      </div>
+
+      <p class="hero-note">No overlays. No audits. Just compliant code in every release.</p>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section" id="how-it-works">
+      <div class="section-header">
+        <h2 class="section-title">How Everymode works</h2>
+        <p class="section-subtitle">Three simple steps to ensure accessibility compliance in your workflow</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-blue">1</div>
+          <h3 class="feature-title">Integrate</h3>
+          <p class="feature-desc">
+            Integrates directly into your developer's workflow.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-green">2</div>
+          <h3 class="feature-title">Analyze</h3>
+          <p class="feature-desc">
+            Contextually learns your codebase and identifies violations against WCAG 2.1 AA, ADA Title II, and EAA EN 301 549 standards in real-time.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-yellow">3</div>
+          <h3 class="feature-title">Remediate</h3>
+          <p class="feature-desc">
+            Suggests or automatically implements fixes, blocking non-compliant code from merging. Ship accessible features every time.
+          </p>
+          <div class="feature-badge">
+            ✓ Compliance-first
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cost Section -->
+    <section class="hero" style="padding-top: 40px;">
+      <!-- Demo Card -->
+      <div class="demo-card">
+        <div class="demo-header">
+          <span class="demo-title">THE COST OF IGNORING ACCESSIBILITY</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-stat">
+            <div class="demo-stat-label">Legal liability</div>
+            <div class="demo-stat-value">71%</div>
+            <div class="demo-stat-desc">of all US accessibility lawsuits target online retail</div>
+            <div class="demo-badge">Accessibility.com, 2024</div>
+          </div>
+          <div class="demo-stat">
+            <div class="demo-stat-label">Compliance deadline</div>
+            <div class="demo-stat-value">76%</div>
+            <div class="demo-stat-desc">face EAA enforcement by June 2030</div>
+            <div class="demo-badge">Level Access, 2025</div>
+          </div>
+          <div class="demo-stat">
+            <div class="demo-stat-label">Market shift</div>
+            <div class="demo-stat-value">82%</div>
+            <div class="demo-stat-desc">already using AI for accessibility</div>
+            <div class="demo-badge">Level Access, 2025</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problems Section -->
+    <section class="stats-section" id="why-matters">
+      <div class="stats-container">
+        <ul class="problems-list">
+          <li class="problem-item">
+            <div class="problem-icon">!</div>
+            <div class="problem-content">
+              <h3>Regulatory pressure intensifying</h3>
+              <p>
+                ADA Title II mandates equal digital access. The European Accessibility Act requires compliance by June 2030 for any business serving EU consumers.
+              </p>
+            </div>
+          </li>
+
+          <li class="problem-item">
+            <div class="problem-icon">⚠</div>
+            <div class="problem-content">
+              <h3>Existing solutions fall short</h3>
+              <p>
+                Overlays create poor UX and don't fix root issues. Manual audits are expensive and only catch problems after deployment—when fixes cost 30x more.
+              </p>
+            </div>
+          </li>
+
+          <li class="problem-item">
+            <div class="problem-icon">×</div>
+            <div class="problem-content">
+              <h3>Teams lack accessibility expertise</h3>
+              <p>
+                Most teams don't have accessibility specialists. Developers face knowledge gaps and overwhelming complexity—leading to deprioritized work.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="get-started">
+      <div class="cta-container">
+        <h2 class="cta-title">Test Everymode with your code</h2>
+        <p class="cta-subtitle">
+          Join product teams already using Everymode to ship accessible software. Get started with our private beta.
+        </p>
+
+        <div class="form-container">
+          <form class="form-grid" onsubmit="event.preventDefault(); window.open('https://repl-name-generator--swk8557.replit.app', '_blank');">
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" required placeholder="Sarah Chen">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Work email</label>
+              <input type="email" id="email" name="email" required placeholder="sarah@yourcompany.com">
+            </div>
+
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" required placeholder="Acme Corp">
+            </div>
+
+            <div class="form-group">
+              <label for="role">Your role</label>
+              <input type="text" id="role" name="role" placeholder="Product Manager, Engineering Lead, etc.">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Tell us about your accessibility challenges (optional)</label>
+              <textarea id="message" name="message" placeholder="e.g., We're preparing for EAA compliance and need automated testing..."></textarea>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn-primary">Request beta access</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <a href="#" class="footer-logo">
+        <div class="logo-icon">
+          <img src="everymode-logo.png" alt="Everymode logo" />
+        </div>
+        <span>© 2025 Everymode. Building accessible software for everyone.</span>
+      </a>
+    </div>
+  </footer>
+</body>
+</html>
